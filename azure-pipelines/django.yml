@@ -1,5 +1,5 @@
 trigger:
-  - main
+  - azurePipeline
 
 pool:
   vmImage: 'ubuntu-latest'
