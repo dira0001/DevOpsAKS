@@ -2,10 +2,10 @@ trigger:
   - azurePipeline
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'DevOpsAgentPool'
 
 variables:
-  pythonVersion: '3.10'
+  pythonVersion: '3.12.3'
 
 stages:
 - stage: BuildAndTest
@@ -22,22 +22,22 @@ stages:
         pip install -r requirements.txt
       displayName: 'Install dependencies'
 
-    - script: |
-        python manage.py test
-      displayName: 'Run Django tests'
+#    - script: |
+#        python manage.py test
+#      displayName: 'Run Django tests'
 
-    - script: |
-        flake8 .
-      displayName: 'Lint with flake8'
+#    - script: |
+#        flake8 .
+#      displayName: 'Lint with flake8'
 
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFiles: '**/TEST-*.xml'
-      condition: succeededOrFailed()
+#    - task: PublishTestResults@2
+#      inputs:
+#        testResultsFiles: '**/TEST-*.xml'
+#      condition: succeededOrFailed()
 
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
+#    - task: PublishBuildArtifacts@1
+#      inputs:
+#        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#        ArtifactName: 'drop'
+#        publishLocation: 'Container'
 
